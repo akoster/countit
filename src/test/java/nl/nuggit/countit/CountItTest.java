@@ -11,22 +11,41 @@ public class CountItTest {
 
     @Test
     public void testNumbersAreIgnored() {
-        String document = "The big brown fox number 4 ";
+        String document = "number 4 ";
 
         String output = countIt.parse(document);
 
         assertFalse(output.contains("4"));
     }
 
+
     @Test
-    public void testOutputsTotalNumberOfWords() {
-        String document = "The big brown fox number 4 ";
+    public void testDotsAreIgnored() {
+        String document = "dog.";
 
         String output = countIt.parse(document);
 
-        String expectedStart = "Number of words: 5";
-        assertTrue(output.startsWith(expectedStart));
+        assertFalse(output.contains("."));
+    }
 
+    @Test
+    public void testOutputsTotalNumberOfWords() {
+        String document = "The big brown fox";
+
+        String output = countIt.parse(document);
+
+        assertTrue(output, output.startsWith("Number of words: 4"));
+    }
+
+    @Test
+    public void testOutputsOccurrenceCountForEachWord() {
+        String document = "the fox the dog";
+
+        String output = countIt.parse(document);
+
+        assertTrue(output.contains("the 2"));
+        assertTrue(output.contains("fox 1"));
+        assertTrue(output.contains("dog 1"));
     }
 
 }
