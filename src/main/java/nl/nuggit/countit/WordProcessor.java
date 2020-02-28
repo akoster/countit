@@ -2,11 +2,19 @@ package nl.nuggit.countit;
 
 import java.util.Arrays;
 
+import nl.nuggit.countit.dependencies.AwesomeScrambler;
+import nl.nuggit.countit.dependencies.InsertionSorter;
+import nl.nuggit.countit.tools.Scrambler;
+import nl.nuggit.countit.tools.Sorter;
+
 public class WordProcessor {
 
     public static void main(String[] args) {
-        Sorter sorter = new MergeSorter();
-        CountIt countIt = new CountIt(sorter);
+
+        Sorter sorter = new InsertionSorter();
+        Scrambler scrambler = new AwesomeScrambler();
+        CountIt countIt = new CountIt(sorter, scrambler);
+
         String document = getDocument(args);
         String[] lines = countIt.parse(document);
         Arrays.stream(lines).forEach(System.out::println);

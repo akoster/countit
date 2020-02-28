@@ -5,35 +5,49 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nl.nuggit.countit.tools.Scrambler;
+import nl.nuggit.countit.tools.Sorter;
+
 public class CountIt {
 
     private Sorter sorter;
+    private Scrambler scrambler;
 
-    public CountIt(Sorter sorter) {
+    public CountIt(Sorter sorter, Scrambler scrambler) {
         this.sorter = sorter;
+        this.scrambler = scrambler;
     }
 
     public String[] parse(String document) {
-        List<String> output = new ArrayList<>();
-        String normalizedDocument = document.replaceAll("\\d+", "").toLowerCase();
-        String[] words = normalizedDocument.split("\\W");
-        output.add(String.format("Number of words: %s", words.length));
-        output.addAll(countOccurrences(words));
-        return output.toArray(new String[0]);
-    }
+        String[] words = getWords(document);
 
-    private List<String> countOccurrences(String[] words) {
         List<String> output = new ArrayList<>();
+
+        output.add(String.format("Number of words: %s", words.length));
+
         Map<String, Integer> wordOccurrences = new HashMap<>();
         for (String word : words) {
             updateCount(wordOccurrences, word);
         }
+
         String[] distinctWords = wordOccurrences.keySet().toArray(new String[0]);
         sorter.sort(distinctWords);
+
         for (String word : distinctWords) {
             output.add(String.format("%s %s", word, wordOccurrences.get(word)));
         }
-        return output;
+        output.add("");
+
+        for (String word : distinctWords) {
+            output.add(scrambler.scramble(word));
+        }
+
+        return output.toArray(new String[0]);
+    }
+
+    private String[] getWords(String document) {
+        String normalizedDocument = document.replaceAll("\\d+", "").toLowerCase();
+        return normalizedDocument.split("\\W");
     }
 
     private void updateCount(Map<String, Integer> wordOccurrences, String word) {

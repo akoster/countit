@@ -1,4 +1,4 @@
-package nl.nuggit.countit;
+package nl.nuggit.countit.tools;
 
 public interface Sorter {
 

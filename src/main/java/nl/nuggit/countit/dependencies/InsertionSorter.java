@@ -1,6 +1,8 @@
-package nl.nuggit.countit;
+package nl.nuggit.countit.dependencies;
 
-public class MergeSorter implements Sorter {
+import nl.nuggit.countit.tools.Sorter;
+
+public class InsertionSorter implements Sorter {
 
     @Override
     public void sort(String[] array) {

@@ -4,15 +4,20 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import nl.nuggit.countit.dependencies.AwesomeScrambler;
+import nl.nuggit.countit.dependencies.InsertionSorter;
+import nl.nuggit.countit.tools.Scrambler;
+import nl.nuggit.countit.tools.Sorter;
 import org.junit.Test;
 
 public class CountItTest {
 
-    private Sorter sorter = new MergeSorter();
-    private CountIt countIt = new CountIt(sorter);
+    private Sorter sorter = new InsertionSorter();
+    private Scrambler scrambler = new AwesomeScrambler();
+    private CountIt countIt = new CountIt(sorter, scrambler);
 
     @Test
-    public void testNumbersAreIgnored() {
+    public void numbersAreIgnored() {
         String document = "number 4 ";
 
         String[] lines = countIt.parse(document);
@@ -22,7 +27,7 @@ public class CountItTest {
     }
 
     @Test
-    public void testDotsAreIgnored() {
+    public void dotsAreIgnored() {
         String document = "dog.";
 
         String[] lines = countIt.parse(document);
@@ -32,7 +37,7 @@ public class CountItTest {
     }
 
     @Test
-    public void testOutputsTotalNumberOfWords() {
+    public void outputsTotalNumberOfWords() {
         String document = "The big brown fox";
 
         String[] lines = countIt.parse(document);
@@ -41,7 +46,7 @@ public class CountItTest {
     }
 
     @Test
-    public void testOutputsOccurrenceCountForEachWordInLowercase() {
+    public void outputsOccurrenceCountForEachWordInLowercase() {
         String document = "The Fox the dog";
 
         String[] lines = countIt.parse(document);
@@ -53,7 +58,7 @@ public class CountItTest {
     }
 
     @Test
-    public void testOutputsOccurrenceCountsAlphabetical() {
+    public void outputsOccurrenceCountsAlphabetical() {
         String document = "The quick brown fox";
 
         String[] lines = countIt.parse(document);
@@ -64,4 +69,16 @@ public class CountItTest {
         assertEquals("the 1", lines[4]);
     }
 
+    @Test
+    public void outputsScrambledWords() {
+        String document = "The quick brown fox";
+
+        String[] lines = countIt.parse(document);
+
+        assertEquals("", lines[5]);
+        assertEquals("nWoRb", lines[6]);
+        assertEquals("xOf", lines[7]);
+        assertEquals("kCiUq", lines[8]);
+        assertEquals("eHt", lines[9]);
+    }
 }
