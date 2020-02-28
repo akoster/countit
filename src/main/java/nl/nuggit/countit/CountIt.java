@@ -6,7 +6,7 @@ import java.util.Map;
 public class CountIt {
 
     public String parse(String document) {
-        String normalizedDocument = document.replaceAll("\\d+", "");
+        String normalizedDocument = document.replaceAll("\\d+", "").toLowerCase();
         String[] words = normalizedDocument.split("\\W");
         String wordCount = String.format("Number of words: %s%n", words.length);
         String wordOccurrences = countOccurrences(words);

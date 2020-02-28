@@ -38,8 +38,8 @@ public class CountItTest {
     }
 
     @Test
-    public void testOutputsOccurrenceCountForEachWord() {
-        String document = "the fox the dog";
+    public void testOutputsOccurrenceCountForEachWordInLowercase() {
+        String document = "The Fox the dog";
 
         String output = countIt.parse(document);
 
