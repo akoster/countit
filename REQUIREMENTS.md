@@ -1,4 +1,4 @@
-#Coding test: Word processing
+# Coding test: Word processing
 
 You are writing the software class CountIt in a word processing system that is capable of counting words in a DOCUMENT. The document is basically a string that needs to be parsed. The following remarks below apply:
 
