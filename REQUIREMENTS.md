@@ -24,7 +24,7 @@ If your document is
 “The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.”
 
 Your console output would be:
-
+```
 Number of words: 23
 big 3
 brown 3
@@ -45,7 +45,7 @@ yZaL
 rEbMuN
 rEvO
 eHt
-
+```
 
 
 

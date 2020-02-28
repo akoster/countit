@@ -1,18 +1,20 @@
 package nl.nuggit.countit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
 public class CountItTest {
 
-    @Test
-    public void testDocumentCanBeParsed() {
+    private CountIt countIt = new CountIt();
 
-        CountIt countIt = new CountIt();
-        String document = "test";
+    @Test
+    public void testNumbersAreIgnored() {
+        String document = "test 123";
+
         String output = countIt.parse(document);
-        assertEquals(document, output);
+
+        assertFalse(output.contains("123"));
 
     }
 
