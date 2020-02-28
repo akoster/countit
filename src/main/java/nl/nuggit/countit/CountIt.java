@@ -1,29 +1,39 @@
 package nl.nuggit.countit;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CountIt {
 
-    public String parse(String document) {
-        String normalizedDocument = document.replaceAll("\\d+", "").toLowerCase();
-        String[] words = normalizedDocument.split("\\W");
-        String wordCount = String.format("Number of words: %s%n", words.length);
-        String wordOccurrences = countOccurrences(words);
-        return wordCount + wordOccurrences;
+    private Sorter sorter;
+
+    public CountIt(Sorter sorter) {
+        this.sorter = sorter;
     }
 
-    private String countOccurrences(String[] words) {
+    public String[] parse(String document) {
+        List<String> output = new ArrayList<>();
+        String normalizedDocument = document.replaceAll("\\d+", "").toLowerCase();
+        String[] words = normalizedDocument.split("\\W");
+        output.add(String.format("Number of words: %s", words.length));
+        output.addAll(countOccurrences(words));
+        return output.toArray(new String[0]);
+    }
+
+    private List<String> countOccurrences(String[] words) {
+        List<String> output = new ArrayList<>();
         Map<String, Integer> wordOccurrences = new HashMap<>();
         for (String word : words) {
             updateCount(wordOccurrences, word);
         }
-        StringBuilder occurrenceOutput = new StringBuilder();
-        for (Map.Entry<String, Integer> entry : wordOccurrences.entrySet()) {
-            occurrenceOutput.append(String.format("%s %s%n", entry.getKey(), entry.getValue()));
+        String[] distinctWords = wordOccurrences.keySet().toArray(new String[0]);
+        sorter.sort(distinctWords);
+        for (String word : distinctWords) {
+            output.add(String.format("%s %s", word, wordOccurrences.get(word)));
         }
-
-        return occurrenceOutput.toString();
+        return output;
     }
 
     private void updateCount(Map<String, Integer> wordOccurrences, String word) {

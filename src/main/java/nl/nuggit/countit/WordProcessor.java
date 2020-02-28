@@ -1,11 +1,15 @@
 package nl.nuggit.countit;
 
+import java.util.Arrays;
+
 public class WordProcessor {
 
     public static void main(String[] args) {
+        Sorter sorter = new MergeSorter();
+        CountIt countIt = new CountIt(sorter);
         String document = getDocument(args);
-        CountIt countIt = new CountIt();
-        String output = countIt.parse(document);
+        String[] lines = countIt.parse(document);
+        Arrays.stream(lines).forEach(System.out::println);
     }
 
     private static String getDocument(String[] args) {
