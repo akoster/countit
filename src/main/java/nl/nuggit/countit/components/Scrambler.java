@@ -1,4 +1,4 @@
-package nl.nuggit.countit.tools;
+package nl.nuggit.countit.components;
 
 public interface Scrambler {
 

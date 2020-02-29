@@ -1,6 +1,6 @@
-package nl.nuggit.countit.dependencies;
+package nl.nuggit.countit.implementations;
 
-import nl.nuggit.countit.tools.Sorter;
+import nl.nuggit.countit.components.Sorter;
 
 public class InsertionSorter implements Sorter {
 

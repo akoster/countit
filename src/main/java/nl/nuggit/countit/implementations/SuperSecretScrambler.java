@@ -1,8 +1,8 @@
-package nl.nuggit.countit.dependencies;
+package nl.nuggit.countit.implementations;
 
-import nl.nuggit.countit.tools.Scrambler;
+import nl.nuggit.countit.components.Scrambler;
 
-public class AwesomeScrambler implements Scrambler {
+public class SuperSecretScrambler implements Scrambler {
     @Override
     public String scramble(String word) {
         StringBuilder sb = new StringBuilder(word).reverse();
