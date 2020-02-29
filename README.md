@@ -18,3 +18,7 @@ java -cp target\classes\ nl.nuggit.countit.WordProcessor "The big brown fox numb
 
 Special symbols like the dot are also ignored. 
 
+There are two Document implementations that use different strategies. The MapBasedDocument is currently wired in the 
+ComponentFactory but it can be exchanged for the SimpleDocument. The implementations have different memory and time
+consumption.
+

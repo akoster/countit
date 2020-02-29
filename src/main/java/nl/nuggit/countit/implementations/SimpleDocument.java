@@ -3,11 +3,13 @@ package nl.nuggit.countit.implementations;
 import java.util.Arrays;
 import java.util.HashSet;
 
-public class Document {
+import nl.nuggit.countit.components.Document;
+
+public class SimpleDocument implements Document {
 
     private String[] words;
 
-    public Document(String text) {
+    public SimpleDocument(String text) {
         words = normalize(text);
     }
 
@@ -15,15 +17,16 @@ public class Document {
         return document.replaceAll("\\d+", "").toLowerCase().split("\\W+");
     }
 
-    public int countWords() {
+    public int numberOfWords() {
         return words.length;
     }
 
-    public String[] getDistinctWords() {
+    public String[] distinctWords() {
         return new HashSet<>(Arrays.asList(words)).toArray(new String[0]);
     }
 
-    public int countOccurrences(String word) {
+    public int occurrenceCount(String word) {
+        //  Iterates the words for each occurrenceCount. Slower, but uses less memory.
         int count = 0;
         for (String w : words) {
             if (w.equals(word)) {
