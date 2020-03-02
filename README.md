@@ -22,3 +22,7 @@ There are two Document implementations that use different strategies. The MapBas
 ComponentFactory but it can be exchanged for the SimpleDocument. The implementations have different memory and time
 consumption.
 
+There is also an extra sorting implementation (SystemSorter) available. The InsertionSorter was implemented because
+the assignment required it, but in production code I would normally choose to use a built in implementation. The 
+SystemSorter calls Arrays.sort() which does a merge sort.
+
