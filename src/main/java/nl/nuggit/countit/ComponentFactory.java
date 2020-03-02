@@ -25,6 +25,7 @@ public class ComponentFactory {
     }
 
     public static Sorter getSorter() {
+        // or try the SystemSorter
         return new InsertionSorter();
     }
 
